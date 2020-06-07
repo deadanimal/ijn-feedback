@@ -33,8 +33,8 @@ from feedbacks.views import (
 complaints_router = router.register(
     'complaints', ComplaintViewSet
 )
-survery_questions_router = router.register(
-    'survery-questions', SurveyQuestionViewSet
+survey_questions_router = router.register(
+    'survey-questions', SurveyQuestionViewSet
 )
 organisations_router = router.register(
     'survey-answers', SurveyAnswerViewSet
@@ -48,6 +48,20 @@ from organisations.views import (
 
 organisations_router = router.register(
     'organisations', OrganisationViewSet
+)
+
+# Tickets app
+
+from tickets.views import (
+    TicketViewSet,
+    ActionViewSet
+)
+
+tickets_router = router.register(
+    'tickets', TicketViewSet
+)
+actions_router = router.register(
+    'actions', ActionViewSet
 )
 
 # Users app

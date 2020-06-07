@@ -50,6 +50,7 @@ INSTALLED_APPS = [
 
     'feedbacks',
     'organisations',
+    'tickets',
     'users'
 ]
 
