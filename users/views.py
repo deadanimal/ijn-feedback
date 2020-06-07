@@ -40,7 +40,6 @@ class CustomUserViewSet(NestedViewSetMixin, viewsets.ModelViewSet):
     serializer_class = CustomUserSerializer
     filter_backends = (DjangoFilterBackend, SearchFilter, OrderingFilter)
     filterset_fields = [
-        'user_type',
         'is_active'
     ]
 
