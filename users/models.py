@@ -17,6 +17,16 @@ class CustomUser(AbstractUser):
     name = models.CharField(max_length=255, blank=True)
     profile_picture = models.ImageField(null=True, upload_to=PathAndRename('images'))
 
+    USER_TYPE = [
+        ('AD', 'Admin'),
+        ('US', 'User')
+    ]
+    user_type = models.CharField(
+        max_length=2,
+        choices=USER_TYPE,
+        default='US'    
+    )
+
     home_number = PhoneNumberField(blank=True)
     office_number = PhoneNumberField(blank=True)
     mobile_number = PhoneNumberField(blank=True)

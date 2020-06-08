@@ -14,16 +14,6 @@ class Organisation(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=100, default='NA')
 
-    USER_TYPE = [
-        ('AD', 'Admin'),
-        ('US', 'User')
-    ]
-    user_type = models.CharField(
-        max_length=2,
-        choices=USER_TYPE,
-        default='US'    
-    )
-
     created_date = models.DateTimeField(auto_now_add=True)
     modified_date = models.DateTimeField(auto_now=True)
 
