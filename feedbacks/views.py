@@ -53,7 +53,25 @@ class ComplaintViewSet(NestedViewSetMixin, viewsets.ModelViewSet):
             else:
                 queryset = Organisation.objects.filter(company=company.id)
         """
-        return queryset    
+        return queryset  
+
+    @action(methods=['GET'], detail=True)
+    def in_progress(self, request, *args, **kwargs):
+        complaint = self.get_object()
+        complaint.status = 'IP'
+        complaint.save()
+
+        serializer = ComplaintSerializer(complaint)
+        return Response(serializer.data)
+
+    @action(methods=['GET'], detail=True)
+    def completed(self, request, *args, **kwargs):
+        complaint = self.get_object()
+        complaint.status = 'CM'
+        complaint.save()
+
+        serializer = ComplaintSerializer(complaint)
+        return Response(serializer.data)
  
 
 class SurveyQuestionViewSet(NestedViewSetMixin, viewsets.ModelViewSet):

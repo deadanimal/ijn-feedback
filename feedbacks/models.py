@@ -20,7 +20,8 @@ class Complaint(models.Model):
     email = models.CharField(max_length=100, default='NA')
     phone = models.CharField(max_length=100, default='NA')
     complaint = models.TextField(default='NA')
-    
+    complaint_to = models.ForeignKey(CustomUser, on_delete=models.CASCADE, null=True, related_name='complaint_to')
+
     COMPLAINT_CATEGORY = [
         ('TX', 'Text'),
         ('VB', 'Verbal'),
@@ -32,6 +33,17 @@ class Complaint(models.Model):
         default='NA'
     )
     supporting_docs = models.FileField(null=True, upload_to=PathAndRename('docs'))
+
+    STATUS = [
+        ('SB', 'Submitted'),
+        ('IP', 'In Progress'),
+        ('CM', 'Completed')
+    ]
+    status = models.CharField(
+        max_length=2,
+        choices=STATUS,
+        default='SB'
+    )
 
     created_date = models.DateTimeField(auto_now_add=True)
     modified_date = models.DateTimeField(auto_now=True)
