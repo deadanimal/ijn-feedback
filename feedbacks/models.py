@@ -22,6 +22,66 @@ class Complaint(models.Model):
     complaint = models.TextField(default='NA')
     complaint_to = models.ForeignKey(CustomUser, on_delete=models.CASCADE, null=True, related_name='complaint_to')
 
+    COMPLAINER_TYPE = [
+        ('PT', 'Patient'),
+        ('VS', 'Visitor'),
+        ('ST', 'Staff')
+    ]
+    complainer_type = models.CharField(
+        max_length=2,
+        choices=COMPLAINER_TYPE,
+        default='PT'
+    )
+
+    location = models.CharField(max_length=255, default='NA')
+    date = models.DateTimeField(blank=True)
+
+    COMPLAINT_CLASS = [
+        ('PP', 'People'),
+        ('PC', 'Process'),
+        ('FC', 'Facilities')
+    ]
+    complaint_class = models.CharField(
+        max_length=2,
+        choices=COMPLAINT_CLASS,
+        default='PP'
+    )
+
+    COMPLAINT_DEPARTMENT = [
+        ('ST', 'Staff'),
+        ('SC', 'Security'),
+        ('CN', 'Cleaner'),
+        ('UT', 'UTKKKM'),
+        ('OT', 'Others'),
+        ('OP', 'Outler Operators')
+    ]
+    complaint_department = models.CharField(
+        max_length=2,
+        choices=COMPLAINT_DEPARTMENT,
+        default='ST'
+    )
+
+    COMPLAINT_POSITION = [
+        ('DR', 'Doctor'),
+        ('NS', 'Nurse'),
+        ('CT', 'Counter')
+    ]
+    complaint_position = models.CharField(
+        max_length=2,
+        choices=COMPLAINT_POSITION,
+        default='DR'
+    )
+
+    COMPLAINT_BEHAVIOR = [
+        ('AP', 'Appearance'),
+        ('AT', 'Attitude')
+    ]
+    complaint_behaviour = models.CharField(
+        max_length=2,
+        choices=COMPLAINT_BEHAVIOR,
+        default='AT'
+    )
+
     COMPLAINT_CATEGORY = [
         ('TX', 'Text'),
         ('VB', 'Verbal'),
