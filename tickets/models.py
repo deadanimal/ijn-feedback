@@ -25,7 +25,7 @@ class Ticket(models.Model):
     status = models.CharField(
         max_length=2,
         choices=STATUS,
-        default='NA'
+        default='OP'
     )
 
     created_date = models.DateTimeField(auto_now_add=True)
