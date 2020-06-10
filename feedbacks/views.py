@@ -13,13 +13,15 @@ from django_filters.rest_framework import DjangoFilterBackend
 from feedbacks.models import (
     Complaint,
     SurveyQuestion,
-    SurveyAnswer
+    SurveyAnswer,
+    Feedback
 )
 
 from feedbacks.serializers import (
     ComplaintSerializer,
     SurveyQuestionSerializer,
-    SurveyAnswerSerializer
+    SurveyAnswerSerializer,
+    FeedbackSerializer
 )
 
 class ComplaintViewSet(NestedViewSetMixin, viewsets.ModelViewSet):
@@ -124,6 +126,40 @@ class SurveyAnswerViewSet(NestedViewSetMixin, viewsets.ModelViewSet):
     
     def get_queryset(self):
         queryset = SurveyAnswer.objects.all()
+
+        """
+        if self.request.user.is_anonymous:
+            queryset = Company.objects.none()
+
+        else:
+            user = self.request.user
+            company_employee = CompanyEmployee.objects.filter(employee=user)
+            company = company_employee[0].company
+            
+            if company.company_type == 'AD':
+                queryset = Organisation.objects.all()
+            else:
+                queryset = Organisation.objects.filter(company=company.id)
+        """
+        return queryset    
+ 
+
+class FeedbackViewSet(NestedViewSetMixin, viewsets.ModelViewSet):
+    queryset = Feedback.objects.all()
+    serializer_class = FeedbackSerializer
+    filter_backends = (DjangoFilterBackend, SearchFilter, OrderingFilter)
+
+    def get_permissions(self):
+        if self.action == 'list':
+            permission_classes = [AllowAny]
+        else:
+            permission_classes = [AllowAny]
+
+        return [permission() for permission in permission_classes]    
+
+    
+    def get_queryset(self):
+        queryset = Feedback.objects.all()
 
         """
         if self.request.user.is_anonymous:

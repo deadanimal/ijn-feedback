@@ -11,7 +11,8 @@ from django.utils.timezone import now
 from .models import (
     Complaint,
     SurveyQuestion,
-    SurveyAnswer
+    SurveyAnswer,
+    Feedback
 )
 
 class ComplaintSerializer(serializers.ModelSerializer):
@@ -32,4 +33,11 @@ class SurveyAnswerSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = SurveyAnswer
+        fields = '__all__'
+
+
+class FeedbackSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Feedback
         fields = '__all__'

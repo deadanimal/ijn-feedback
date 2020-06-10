@@ -27,7 +27,8 @@ router = NestedDefaultRouter()
 from feedbacks.views import (
     ComplaintViewSet,
     SurveyQuestionViewSet,
-    SurveyAnswerViewSet
+    SurveyAnswerViewSet,
+    FeedbackViewSet
 )
 
 complaints_router = router.register(
@@ -36,8 +37,11 @@ complaints_router = router.register(
 survey_questions_router = router.register(
     'survey-questions', SurveyQuestionViewSet
 )
-organisations_router = router.register(
+survey_answers_router = router.register(
     'survey-answers', SurveyAnswerViewSet
+)
+feedbacks_router = router.register(
+    'feedbacks', FeedbackViewSet
 )
 
 # Organisations app
