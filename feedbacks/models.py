@@ -16,9 +16,9 @@ from users.models import (
 class Complaint(models.Model):
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    name = models.CharField(max_length=100, null=True)
-    email = models.CharField(max_length=100, null=True)
-    phone = models.CharField(max_length=100, null=True)
+    name = models.CharField(max_length=100, null=True, blank=True)
+    email = models.CharField(max_length=100, null=True, blank=True)
+    phone = models.CharField(max_length=100, null=True, blank=True)
     complaint = models.TextField(null=True)
     complaint_to = models.ForeignKey(CustomUser, on_delete=models.CASCADE, null=True, related_name='complaint_to')
 
@@ -118,7 +118,7 @@ class Complaint(models.Model):
 class SurveyQuestion(models.Model):
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    question = models.CharField(max_length=100, null=True)
+    question = models.CharField(max_length=100, null=True, blank=True)
     
     CATEGORY = [
         ('IN', 'Internal'),
@@ -159,7 +159,7 @@ class SurveyQuestion(models.Model):
 class SurveyAnswer(models.Model):
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    answer = models.CharField(max_length=100, null=True)
+    answer = models.CharField(max_length=100, null=True, blank=True)
     question = models.ForeignKey(SurveyQuestion, on_delete=models.CASCADE)
     by = models.ForeignKey(CustomUser, on_delete=models.CASCADE, null=True, related_name='survey_answer_by')
 
@@ -177,10 +177,10 @@ class Feedback(models.Model):
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     is_patient = models.BooleanField(default=True)
-    name = models.CharField(max_length=100, null=True)
-    mrn = models.CharField(max_length=100, null=True)
-    phone = models.CharField(max_length=100, null=True)
-    email = models.CharField(max_length=100, null=True)
+    name = models.CharField(max_length=100, null=True, blank=True)
+    mrn = models.CharField(max_length=100, null=True, blank=True)
+    phone = models.CharField(max_length=100, null=True, blank=True)
+    email = models.CharField(max_length=100, null=True, blank=True)
 
     PATIENT_TYPE = [
         ('IN', 'Inpatient'),
@@ -211,7 +211,7 @@ class Feedback(models.Model):
         choices=FEEDBACK_TYPE,
         default='01'
     )
-    feedback = models.CharField(max_length=100, null=True)
+    feedback = models.CharField(max_length=100, null=True, blank=True)
 
     WAITING_TYPE = [
         ('AD', 'Admission'),
